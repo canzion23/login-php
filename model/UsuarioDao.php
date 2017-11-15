@@ -1,7 +1,7 @@
 <?php
 
-require 'Conexion.php';
-require '../entity/Usuario.php';
+include ('Conexion.php');
+include ('../entity/Usuario.php');
 
 class UsuarioDao extends Conexion 
 {
@@ -23,8 +23,8 @@ class UsuarioDao extends Conexion
 	 */
 	public static function login($usuario) 
 	{
-		$query = "SELECT id, nombre, usuario, email, privilegio, fecha_registro 
-		            FROM usuario WHERE usuario = :usuairo AND password = :password";
+		$query = 'SELECT id, nombre, usuario, email, privilegio, fecha_registro 
+					FROM usuarios WHERE usuario = :usuario AND password = :password';
 
 		self::getConexion();
 
@@ -33,14 +33,19 @@ class UsuarioDao extends Conexion
 		$user = $usuario->getUsuario();
 		$pass = $usuario->getPassword();
 
-		$result->bindParam(":usuario", $user);
-		$result->bindParam(":password", $passs);
+		//echo $user;
+		//echo $pass;
+		
+		$result->bindParam(':usuario', $user, PDO::PARAM_STR, 15);
+		$result->bindParam(':password', $pass, PDO::PARAM_STR, 15);		
 
+		
+		
 		$result->execute();
 
-		if(count($result)) 
+		if($result->rowCount() == 1 ) 
 		{
-			return "OK";
+			return "Existe 1 Usuario";
 		}
 
 		return "Falso";

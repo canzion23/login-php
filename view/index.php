@@ -1,9 +1,7 @@
 <?php
 
-require '../controller/UsuarioControlador.php';
+include '../controller/UsuarioControlador.php';
 
-echo UsuarioControlador::login("admin","1234");
-
-
+echo UsuarioControlador::login("canzion23","admin");
 
 ?>

@@ -14,11 +14,10 @@ class Conexion
 			$cn = new PDO("mysql:host=localhost;dbname=login-php","root","");
 
 			//echo "Conectado";
-
 			return $cn;
 
-		} catch(PDOException $e) {
-			die($ex->getMessage());
+		} catch(PDOException $ex) {
+			die($ex->getMessage());			
 		}
 	}
 }
